@@ -1,4 +1,4 @@
-package com.example.demo.pjgl.configserver.demopjglconfigserver;
+package com.example.config.server.demopjglconfigserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
