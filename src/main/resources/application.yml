@@ -6,7 +6,17 @@ spring:
     name: configserver
   profiles:
     active: git
+  #server:
+    #native:
+      #search-locations: "classpath:/config"
+      #search-locations: "file:///Users//pguevarl//Documents//config"
   cloud.config.server.git:
     uri: https://github.com/pauljgl2008/demo-pjgl-enviroments-secrets
-    clone-on-start: true
     default-label: main
+    timeout: 5
+    clone-on-start: true
+    force-pull: true
+    refresh-rate: 0
+
+encrypt:
+  key: "MYSECRETKEY"
