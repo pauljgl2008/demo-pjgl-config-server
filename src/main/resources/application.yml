@@ -11,6 +11,8 @@ spring:
       #search-locations: "classpath:/config"
       #search-locations: "file:///Users//pguevarl//Documents//config"
   cloud.config.server.git:
+    username: pauljgl2008
+    password: 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
     uri: https://github.com/pauljgl2008/demo-pjgl-enviroments-secrets
     default-label: main
     timeout: 5
