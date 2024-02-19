@@ -10,11 +10,14 @@ COPY target/demo-pjgl-config-server-0.0.1-SNAPSHOT.jar /app/pjgl-config-server.j
 # Expone el puerto en el que tu aplicación Spring Boot está escuchando (el mismo que especificas en tu aplicación)
 EXPOSE 8085
 
-COPY entrypoint.sh /app/entrypoint.sh
+# COPY entrypoint.sh /app/entrypoint.sh
 
-RUN chmod +x /app/entrypoint.sh
+# RUN chmod +x /app/entrypoint.sh
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+# ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Nombre de la imagen
 LABEL app="pjgl-config-server"
+
+# Comando para ejecutar la aplicación Spring Boot al iniciar el contenedor
+CMD ["java", "-jar", "/app/pjgl-config-server.jar"]
