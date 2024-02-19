@@ -1,9 +1,5 @@
-# Usa una imagen base de OpenJDK para Java 21
+# Usa una imagen base de OpenJDK para Java 21 con Alpine Linux
 FROM openjdk:22-ea-34 AS build
-
-# Instala netcat
-RUN apk update && apk add --no-cache netcat-openbsd
-
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
@@ -22,6 +18,3 @@ ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Nombre de la imagen
 LABEL app="pjgl-config-server"
-
-# Comando para ejecutar la aplicación Spring Boot al iniciar el contenedor
-# CMD ["java", "-jar", "/app/pjgl-config-server.jar"]
