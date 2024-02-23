@@ -20,6 +20,7 @@ spring:
     #stream:
       #rabbit:
         #enabled: false
+
   key: "MYSECRETKEY"
 
 management:
