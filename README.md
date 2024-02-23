@@ -19,3 +19,5 @@ Correr la imagen de RabbitMQ antes de iniciar el micro:
 - $ docker login
 - $ docker tag pjgl-config-server pguevarl/demo-pjgl-docker-hub-repository:configserver
 - $ docker push pguevarl/demo-pjgl-docker-hub-repository:configserver
+
+kubectl port-forward service/pjgl-config-server 8085:8085
