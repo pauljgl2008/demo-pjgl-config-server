@@ -14,3 +14,8 @@ o añadir en el docker-compose el siguiente atributo:
 
 Correr la imagen de RabbitMQ antes de iniciar el micro:
 - $ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
+
+# PUSH A DOCKER HUB:
+- $ docker login
+- $ docker tag pjgl-config-server pguevarl/demo-pjgl-docker-hub-repository:configserver
+- $ docker push pguevarl/demo-pjgl-docker-hub-repository:configserver
