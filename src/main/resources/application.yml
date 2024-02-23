@@ -6,11 +6,7 @@ spring:
     name: configserver
   profiles:
     active: git
-  cloud.bus.enabled: true
-  #server:
-    #native:
-      #search-locations: "classpath:/config"
-      #search-locations: "file:///Users//pguevarl//Documents//config"
+  cloud.bus.enabled: false
   cloud.config.server.git:
     username: pauljgl2008
     password: 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
@@ -20,15 +16,10 @@ spring:
     clone-on-start: true
     force-pull: true
     refresh-rate: 0
-  #rabbitmq:
-    #host: 172.20.0.3
-    #host: localhost
-    #host: host.docker.internal
-    #port: 5672
-    #username: guest
-    #password: guest
-
-encrypt:
+  #cloud:
+    #stream:
+      #rabbit:
+        #enabled: false
   key: "MYSECRETKEY"
 
 management:
