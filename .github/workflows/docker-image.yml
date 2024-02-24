@@ -42,6 +42,8 @@ jobs:
         docker buildx build -t pguevarl/config-server:latest .
     
     - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker push pguevarl/config-server:$NEW_VERSION
         docker push pguevarl/config-server:latest
