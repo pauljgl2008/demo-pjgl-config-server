@@ -46,9 +46,7 @@ jobs:
         tags: |
             pguevarl/config-server:$NEW_VERSION
             pguevarl/config-server:latest
-        build_args: $NEW_VERSION
         platforms: linux/amd64,linux/arm64,linux/arm/v7
-        cache_from: type=registry,ref=https://hub.docker.com/repository/docker/pguevarl/config-server  # Optional: Use build cache
 
 #    - name: Build Docker Image
 #      env:
