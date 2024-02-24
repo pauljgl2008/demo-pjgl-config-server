@@ -34,21 +34,32 @@ jobs:
       run: |
         docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
     
-    - name: Build Docker Image
-      # Add the following line to enable BuildKit driver
+    - name: Set up Buildx
+      uses: docker/setup-buildx-action@v3
       with:
         driver: buildkit
-      env:
-        NEW_VERSION: ${{ steps.version.outputs.version }}
-      # Set environment variable for containerd image store
-      run: |
-        export DOCKER_BUILDKIT_BUILD_ARGS="--experimental-buildkit-enabled=true --dockerfile=dockerfile.dockerfile"
-        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:$NEW_VERSION .
-        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest .
 
+    - name: Build Docker Image
+      uses: docker/build-push-action@v3
+      with:
+        push: false  # Set to true if you want to push the image
+        tags: ${{ steps.version.outputs.version }}
+        build_args: ${{ steps.version.outputs }}  # Pass version from previous step
+        platforms: linux/amd64,linux/arm64,linux/arm/v7
+        cache_from: type=registry,ref=docker.io/library/pguevarl/config-server:build-cache  # Optional: Use build cache
+
+#    - name: Build Docker Image
+#      env:
+#        NEW_VERSION: ${{ steps.version.outputs.version }}
+#      run: |
+#        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:$NEW_VERSION .
+#        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest .
+    
     - name: Push Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker push pguevarl/config-server:$NEW_VERSION
         docker push pguevarl/config-server:latest
+#    - name: Build the Docker image
+#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
