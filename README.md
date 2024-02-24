@@ -10,7 +10,8 @@ o añadir en el docker-compose el siguiente atributo:
         extra_hosts:
            "host.docker.internal:host-gateway"
 
-- $ docker buildx build -t pjgl-config-server .
+- $ docker buildx build -t 0.0.1 .
+- docker run -p 8085:8085 0.0.1
 
 Correr la imagen de RabbitMQ antes de iniciar el micro:
 - $ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
