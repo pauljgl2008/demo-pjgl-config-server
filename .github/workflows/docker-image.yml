@@ -38,8 +38,8 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker buildx build -t pguevarl/config-server:$NEW_VERSION .
-        docker buildx build -t pguevarl/config-server:latest .
+        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:$NEW_VERSION .
+        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest .
     
     - name: Push Docker Image
       env:
@@ -47,5 +47,3 @@ jobs:
       run: |
         docker push pguevarl/config-server:$NEW_VERSION
         docker push pguevarl/config-server:latest
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)

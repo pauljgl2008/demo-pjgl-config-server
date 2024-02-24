@@ -27,3 +27,36 @@ kubectl port-forward service/pjgl-config-server 8085:8085
 
 # Git Semantic Version:
 https://github.com/marketplace/actions/git-semantic-version
+
+# Explorar que tiene mi imagen docker:
+  $ docker container run -d pguevarl/config-server
+  bd50b418618ba2fa816d82c9fb437ae6446d0878fde165e7b884bd31bfe1db93
+  $ docker exec -it bd5 /bin/sh
+  $ ls
+  pjgl-config-server.jar
+  $ exit
+
+# Listar arquitecturas de docker que construye nuestras imagenes - DOC: https://docs.docker.com/build/building/multi-platform/#getting-started
+  $ docker buildx ls
+
+    NAME/NODE DRIVER/ENDPOINT STATUS  BUILDKIT             PLATFORMS
+    default * docker
+      default default         running v0.11.6+0a15675913b7 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
+# Descargamos la imagen:
+  - $ docker buildx create --name mybuilder --bootstrap --use
+
+# Verificamos que se haya descargado y seleccionado el build de "mybuilder":
+  - $ docker buildx ls
+
+        NAME/NODE    DRIVER/ENDPOINT             STATUS  BUILDKIT             PLATFORMS
+        mybuilder *  docker-container
+          mybuilder0 unix:///var/run/docker.sock running v0.12.5              linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
+        default      docker
+          default    default                     running v0.11.6+0a15675913b7 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
+# En caso no esté seleccionado, usamos el diguiente comando:
+  - $ docker buildx use mybuilder
+
+# Dockerizar y pushear a DockerHub:
+  - $ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <username>/<image>:latest --push .
+  Ejemplo:
+  - $ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest --push .
