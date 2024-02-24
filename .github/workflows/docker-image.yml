@@ -38,14 +38,12 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker Image
-      env:
-        NEW_VERSION: ${{ steps.version.outputs.version }}
       uses: docker/build-push-action@v3
       with:
         push: true  # Set to true if you want to push the image
         tags: |
             pguevarl/config-server:latest
-            pguevarl/config-server:$NEW_VERSION
+            pguevarl/config-server:${{ steps.version.outputs.version }}
         platforms: linux/amd64,linux/arm64,linux/arm/v7
 
 #    - name: Build Docker Image
