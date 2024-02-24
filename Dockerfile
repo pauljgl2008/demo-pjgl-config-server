@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM maven:3.9.6-ibm-semeru-21-jammy as build
+FROM maven:3.9.6-ibm-semeru-21-jammy as build
 # Copia el código fuente de la aplicación a la imagen
 COPY . /app
 
@@ -15,7 +15,7 @@ RUN mvn clean test
 RUN mvn clean package
 
 # Usa una imagen base de OpenJDK para Java 21 con Alpine Linux
-FROM --platform=$BUILDPLATFORM openjdk:23-jdk-slim AS final
+FROM openjdk:23-jdk-slim AS final
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app

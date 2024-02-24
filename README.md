@@ -10,6 +10,7 @@ o añadir en el docker-compose el siguiente atributo:
         extra_hosts:
            "host.docker.internal:host-gateway"
 
+- $ docker buildx build -t pguevarl/config-server:latest --load .
 - $ docker buildx build -t config-server .
 - $ docker buildx build -t pguevarl/config-server:0.0.1 .
 - $ docker push pguevarl/config-server:0.0.1
@@ -36,9 +37,9 @@ https://github.com/marketplace/actions/git-semantic-version
   pjgl-config-server.jar
   $ exit
 
-# Listar arquitecturas de docker que construye nuestras imagenes - DOC: https://docs.docker.com/build/building/multi-platform/#getting-started
+# Listar arquitecturas de docker que construye nuestras imagenes
+# https://docs.docker.com/build/building/multi-platform/#getting-started
   $ docker buildx ls
-
     NAME/NODE DRIVER/ENDPOINT STATUS  BUILDKIT             PLATFORMS
     default * docker
       default default         running v0.11.6+0a15675913b7 linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
