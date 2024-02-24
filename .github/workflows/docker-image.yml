@@ -45,19 +45,3 @@ jobs:
             pguevarl/config-server:${{ steps.version.outputs.version }}
             pguevarl/config-server:latest
         platforms: linux/amd64,linux/arm64,linux/arm/v7
-
-#    - name: Build Docker Image
-#      env:
-#        NEW_VERSION: ${{ steps.version.outputs.version }}
-#      run: |
-#        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:$NEW_VERSION .
-#        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest .
-    
-#    - name: Push Docker Image 2
-#      env:
-#        NEW_VERSION: ${{ steps.version.outputs.version }}
-#      run: |
-#        docker push pguevarl/config-server:$NEW_VERSION
-#        docker push pguevarl/config-server:latest
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
