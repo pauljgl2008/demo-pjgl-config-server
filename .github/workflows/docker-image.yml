@@ -40,7 +40,7 @@ jobs:
     - name: Build Docker Image
       uses: docker/build-push-action@v3
       with:
-        push: true  # Set to true if you want to push the image
+        push: true
         tags: |
             pguevarl/config-server:${{ steps.version.outputs.version }}
             pguevarl/config-server:latest
