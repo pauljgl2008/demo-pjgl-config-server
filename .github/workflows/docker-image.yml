@@ -18,19 +18,32 @@ jobs:
       with:
         fetch-depth: 0
     
+    - name: Git Semantic Version
+      uses: paulhatch/semantic-version@v5.3.0
+      with:
+        major_pattern: "major:"
+        minor_pattern: "feat:"
+        version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+      id: version
+
     - name: Docker login
       env:
         DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
         DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
       run: |
         docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
     
     - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker buildx build -t pguevarl/config-server:0.0.1 .
+        docker buildx build -t pguevarl/config-server:$NEW_VERSION .
+        docker buildx build -t pguevarl/config-server:latest .
     
     - name: Push Docker Image
       run: |
-        docker push pguevarl/config-server:0.0.1
+        docker push pguevarl/config-server:$NEW_VERSION
+        docker push pguevarl/config-server:latest
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
