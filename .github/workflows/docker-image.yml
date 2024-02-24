@@ -46,7 +46,7 @@ jobs:
         tags: ${{ steps.version.outputs.version }}
         build_args: $NEW_VERSION
         platforms: linux/amd64,linux/arm64,linux/arm/v7
-        cache_from: type=registry,ref=docker.io/library/pguevarl/config-server:build-cache  # Optional: Use build cache
+        cache_from: type=registry,ref=https://hub.docker.com/repository/docker/pguevarl/config-server:build-cache  # Optional: Use build cache
 
 #    - name: Build Docker Image
 #      env:
