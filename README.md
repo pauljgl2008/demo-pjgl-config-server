@@ -12,6 +12,7 @@ o añadir en el docker-compose el siguiente atributo:
 
 - $ docker buildx build -t config-server .
 - $ docker buildx build -t pguevarl/config-server:0.0.1 .
+- $ docker push pguevarl/config-server:0.0.1
 - docker run -p 8085:8085 0.0.1
 
 Correr la imagen de RabbitMQ antes de iniciar el micro:

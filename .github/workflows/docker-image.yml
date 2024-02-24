@@ -23,8 +23,14 @@ jobs:
         DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
         DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       run: |
-        echo "Iniciando login"
         docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-        echo "Fin del login"
+    
+    - name: Build Docker Image
+      run: |
+        docker buildx build -t pguevarl/config-server:0.0.1 .
+    
+    - name: Push Docker Image
+      run: |
+        docker push pguevarl/config-server:0.0.1
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
