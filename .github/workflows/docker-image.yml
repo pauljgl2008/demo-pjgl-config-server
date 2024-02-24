@@ -36,8 +36,6 @@ jobs:
     
     - name: Set up Buildx
       uses: docker/setup-buildx-action@v3
-      with:
-        driver: buildkit
 
     - name: Build Docker Image
       uses: docker/build-push-action@v3
