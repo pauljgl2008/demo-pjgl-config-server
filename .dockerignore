@@ -1,0 +1,32 @@
+# Archivos de configuración local
+.env
+.idea/
+.vscode/
+.git
+.github
+dist
+node_modules
+
+# Archivos de prueba
+**/target/
+**/test/
+
+# Archivos generados
+**/build/
+**/.gradle/
+**/.mvn/
+
+# Archivos de caché
+**/.m2/
+**/node_modules/
+
+# Archivos específicos de Spring Boot
+**/spring-boot-devtools/**
+
+# Otros archivos temporales
+*.log
+*.tmp
+
+# Archivos específicos de Docker
+Dockerfile
+docker-compose.yml

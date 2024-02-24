@@ -21,6 +21,7 @@ spring:
       #rabbit:
         #enabled: false
 
+encrypt:
   key: "MYSECRETKEY"
 
 management:
