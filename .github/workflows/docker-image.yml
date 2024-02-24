@@ -37,10 +37,15 @@ jobs:
     - name: Build Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
+      # Set environment variable for containerd image store
       run: |
+        export DOCKER_BUILDKIT_BUILD_ARGS="--experimental-buildkit-enabled=true --dockerfile=dockerfile.dockerfile"
         docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:$NEW_VERSION .
         docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest .
-    
+      # Add the following line to enable BuildKit driver
+      with:
+        driver: buildkit
+
     - name: Push Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
