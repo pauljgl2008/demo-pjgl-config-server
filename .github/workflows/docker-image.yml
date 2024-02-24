@@ -42,11 +42,13 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       with:
-        push: false  # Set to true if you want to push the image
-        tags: ${{ steps.version.outputs.version }}
+        push: true  # Set to true if you want to push the image
+        tags: |
+            pguevarl/config-server:$NEW_VERSION
+            pguevarl/config-server:latest
         build_args: $NEW_VERSION
         platforms: linux/amd64,linux/arm64,linux/arm/v7
-        cache_from: type=registry,ref=https://hub.docker.com/repository/docker/pguevarl/config-server:build-cache  # Optional: Use build cache
+        cache_from: type=registry,ref=https://hub.docker.com/repository/docker/pguevarl/config-server  # Optional: Use build cache
 
 #    - name: Build Docker Image
 #      env:
@@ -55,11 +57,11 @@ jobs:
 #        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:$NEW_VERSION .
 #        docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t pguevarl/config-server:latest .
     
-    - name: Push Docker Image
-      env:
-        NEW_VERSION: ${{ steps.version.outputs.version }}
-      run: |
-        docker push pguevarl/config-server:$NEW_VERSION
-        docker push pguevarl/config-server:latest
+#    - name: Push Docker Image 2
+#      env:
+#        NEW_VERSION: ${{ steps.version.outputs.version }}
+#      run: |
+#        docker push pguevarl/config-server:$NEW_VERSION
+#        docker push pguevarl/config-server:latest
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
